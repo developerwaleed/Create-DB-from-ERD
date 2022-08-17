@@ -27,4 +27,18 @@ CREATE TABLE treatments
     name VARCHAR(250), 
     PRIMARY KEY(id));
 
+CREATE TABLE invoice_items 
+( id INT GENERATED ALWAYS AS IDENTITY, 
+    unit_price decimal(10,2),
+    quantity INT,
+    total_price decimal(10,2),
+  invoice_id INT REFERENCES invoices(id),
+  treatment_id INT REFERENCES treatments(id),
+    PRIMARY KEY(id));
+
+CREATE TABLE treatments_histories(
+  treatment_id INT REFERENCES treatments(id),
+  medical_history_id INT REFERENCES medical_histories(id),
+  PRIMARY KEY(treatment_id, medical_history_id)
+);
 
